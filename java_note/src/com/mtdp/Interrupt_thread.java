@@ -54,18 +54,41 @@ public class Interrupt_thread {
 
         final ReentrantLock l1 = new ReentrantLock();
         final ReentrantLock l2 = new ReentrantLock();
-        Thread tt1 = new Thread(){
 
-            l1.lockInterruptibly();
-            Thread.sleep(1000);
-            l2.lockInterruptibly();
+        Thread tt1 = new Thread(){
+            public void run(){
+                try {
+                    l1.lockInterruptibly();
+                    Thread.sleep(1000);
+                    l2.lockInterruptibly();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         };
+
+
 
         Thread tt2 = new Thread(){
-
-            l2.lockInterruptibly();
-            Thread.sleep(1000ß);
-            l1.lockInterruptibly();
+            public void run(){
+                try {
+                    l2.lockInterruptibly();
+                    Thread.sleep(1000);
+                    l1.lockInterruptibly();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         };
+
+        tt1.start();
+        tt2.start();
+ //       Thread.sleep(2000);
+        System.out.println("------");
+        tt1.interrupt();
+        tt2.interrupt();
+ //       tt1.join();
+ //       tt2.join();
+        System.out.println("====");
     }
 }
