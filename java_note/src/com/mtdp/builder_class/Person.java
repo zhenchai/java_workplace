@@ -2,6 +2,7 @@ package com.mtdp.builder_class;
 
 /**
  * Created by zhenchai on 2017/6/26.
+ * 通过构建器生成对象
  */
 public class Person {
 
